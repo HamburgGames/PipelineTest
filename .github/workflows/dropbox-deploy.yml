@@ -23,6 +23,6 @@ jobs:
           # Glob that you want to save to Dropbox e.g dir1/dir2/**/*.md or **/*.txt
           GLOB: world.txt
           # The destination path prefix to save to in Dropbox. This will prepend the individual globs. Default value is "/"
-          # DROPBOX_DESTINATION_PATH_PREFIX: # optional, default is /
+          DROPBOX_DESTINATION_PATH_PREFIX: /test/ # optional, default is /
           # Enable debugging.
           # DEBUG: # optional
