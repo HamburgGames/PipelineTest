@@ -60,3 +60,13 @@ jobs:
           DROPBOX_DESTINATION_PATH_PREFIX: builds/ # optional, default is /
           # Enable debugging.
           # DEBUG: # optional
+  deploy:
+    name: Deploy to Dropbox
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      #Download artifact
+      
+      #Upload to Dropbox
+      
+      #Post Link to Discord
