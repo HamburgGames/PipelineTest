@@ -61,6 +61,9 @@ jobs:
           # Destination path
           path: build # optional
           
+      - name: ls
+        run: ls && cd build && ls
+          
       # Upload to Dropbox
       - name: Upload to Dropbox
       # You may pin to the exact commit or the version.
