@@ -21,7 +21,7 @@ jobs:
           # Value should be a secret that is set in your repository settings
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
           # Glob that you want to save to Dropbox e.g dir1/dir2/**/*.md or **/*.txt
-          GLOB: /*
+          # GLOB: /*
           # The destination path prefix to save to in Dropbox. This will prepend the individual globs. Default value is "/"
           DROPBOX_DESTINATION_PATH_PREFIX: /${{ github.ref_name }}-test/ # optional, default is /
           # Enable debugging.
