@@ -46,7 +46,10 @@ jobs:
         with:
           name: Build
           path: build
-      
+  deploy:
+    name: Deploy Artifact
+    runs-on: ubuntu-latest
+    steps:
       # Deploy to dropbox
       - name: Deploy to Dropbox
       # You may pin to the exact commit or the version.
