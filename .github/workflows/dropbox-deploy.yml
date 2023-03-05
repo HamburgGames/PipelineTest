@@ -36,7 +36,7 @@ jobs:
           path: build # optional
           
       - name: ls
-        run: ls
+        run: cd build && ls
       
       # Checkout
       - name: Deploy to Dropbox
