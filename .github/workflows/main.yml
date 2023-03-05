@@ -40,12 +40,16 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: StandaloneWindows64
+          
+      # Zip build
+      - name: Zip files
+        run: zip -r build.zip build
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: build
+          path: build.zip
           
   deploy:
     name: Deploy to Dropbox
