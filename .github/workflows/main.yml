@@ -73,6 +73,5 @@ jobs:
           # The destination path prefix to save to in Dropbox. This will prepend the individual globs. Default value is "/"
           DROPBOX_DESTINATION_PATH_PREFIX: /builds/ # optional, default is /
           # Enable debugging.
-          # DEBUG: # optional
-          
+          DEBUG: true # optional
       #Post Link to Discord
