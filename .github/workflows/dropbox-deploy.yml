@@ -5,12 +5,35 @@ on:
 # [push, pull_request]
 
 jobs:
-  deploy:
-    name: Deploy to Dropbox
+  create:
+    name: Create files
     runs-on: ubuntu-latest
     steps:
       - name: create world.txt
         run: mkdir test && echo hello > test/helloWorld1.txt && echo "hello 2" > test/helloWorld2.txt
+        
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          # Artifact name
+          name: Build # optional, default is artifact
+          # A file, directory or wildcard pattern that describes what to upload
+          path: build
+          # The desired behavior if no files are found using the provided path.
+      
+
+  deploy:
+    needs: create
+    name: Deploy to Dropbox
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v3.0.2
+        with:
+          # Artifact name
+          name: Build # optional
+          # Destination path
+          path: build # optional
       
       # Checkout
       - name: Deploy to Dropbox
@@ -21,7 +44,7 @@ jobs:
           # Value should be a secret that is set in your repository settings
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
           # Glob that you want to save to Dropbox e.g dir1/dir2/**/*.md or **/*.txt
-          GLOB: test/*
+          GLOB: build/*
           # The destination path prefix to save to in Dropbox. This will prepend the individual globs. Default value is "/"
           DROPBOX_DESTINATION_PATH_PREFIX: /${{ github.ref_name }}-test/ # optional, default is /
           # Enable debugging.
