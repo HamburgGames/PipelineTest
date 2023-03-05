@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create world.txt
-        run: mkdir test && echo hello > test/helloWorld.txt
+        run: mkdir test && echo hello > test/helloWorld1.txt && echo "hello 2" > test/helloWorld2.txt
       
       # Checkout
       - name: Deploy to Dropbox
@@ -23,6 +23,6 @@ jobs:
           # Glob that you want to save to Dropbox e.g dir1/dir2/**/*.md or **/*.txt
           GLOB: test/*
           # The destination path prefix to save to in Dropbox. This will prepend the individual globs. Default value is "/"
-          DROPBOX_DESTINATION_PATH_PREFIX: /test/ # optional, default is /
+          DROPBOX_DESTINATION_PATH_PREFIX: /${{ github.ref_name }}-test/ # optional, default is /
           # Enable debugging.
           # DEBUG: # optional
