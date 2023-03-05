@@ -46,6 +46,20 @@ jobs:
         with:
           name: Build
           path: build
+      # Deploy to dropbox
+      - name: Deploy to Dropbox
+      # You may pin to the exact commit or the version.
+      # uses: aTable/deploy-to-dropbox@d2a7533bc8aa47273469c24b137fc55e41760bca
+        uses: aTable/deploy-to-dropbox@v1.0.7
+        with:
+          # Value should be a secret that is set in your repository settings
+          # DROPBOX_ACCESS_TOKEN: 
+          # Glob that you want to save to Dropbox e.g dir1/dir2/**/*.md or **/*.txt
+          GLOB: Build
+          # The destination path prefix to save to in Dropbox. This will prepend the individual globs. Default value is "/"
+          # DROPBOX_DESTINATION_PATH_PREFIX: # optional, default is /
+          # Enable debugging.
+          # DEBUG: # optional
   deploy:
     name: Deploy Artifact
     runs-on: ubuntu-latest
@@ -59,8 +73,8 @@ jobs:
           # Value should be a secret that is set in your repository settings
           # DROPBOX_ACCESS_TOKEN: 
           # Glob that you want to save to Dropbox e.g dir1/dir2/**/*.md or **/*.txt
-          GLOB: test/
+          GLOB: Build
           # The destination path prefix to save to in Dropbox. This will prepend the individual globs. Default value is "/"
-          # DROPBOX_DESTINATION_PATH_PREFIX: # optional, default is /
+          DROPBOX_DESTINATION_PATH_PREFIX: builds/ # optional, default is /
           # Enable debugging.
           # DEBUG: # optional
