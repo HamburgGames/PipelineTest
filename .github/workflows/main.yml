@@ -89,7 +89,7 @@ jobs:
       - name: Discord Notify
         uses: stegzilla/discord-notify@v4
         with:
-          webhook_url: ${{ github.DISCORD_WEBHOOK }}
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
           # Title for card
           title: Build Link # optional, default is 
           # Content of card
