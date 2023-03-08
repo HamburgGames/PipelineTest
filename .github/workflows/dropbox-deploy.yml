@@ -77,7 +77,7 @@ jobs:
         run: echo "link=${{ steps.create-link-dropbox.outputs.link }}" >> "$GITHUB_OUTPUT"
         
   publish-link:
-    name: Share Link 📰
+    name: Share Link 🛎️
     needs: deploy
     runs-on: ubuntu-latest
     steps:
