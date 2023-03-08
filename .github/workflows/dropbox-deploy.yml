@@ -31,7 +31,7 @@ jobs:
     needs: create
     runs-on: ubuntu-latest
     outputs:
-      link: ${{ steps.create-link-dropbox.link }}
+      link: ${{ steps.link-write.outputs.link }}
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v3.0.2
@@ -71,8 +71,11 @@ jobs:
           DROPBOX_FILE_PATH: /${{ github.ref_name }}-test # optional, default is /
           # Enable debugging.
           DEBUG: false # optional
-
-
+          
+      - name: Write Link into Output
+        id: link-write
+        run: echo "link=${{ steps.create-link-dropbox.outputs.link }}" >> "$GITHUB_OUTPUT"
+        
   publish-link:
     name: Share Link 📰
     needs: deploy
@@ -86,7 +89,7 @@ jobs:
           # Title for card
           title: Build Link # optional, default is 
           # Content of card
-          message: ${{needs.deploy.outputs.link}} # default is 
+          message: "Download Link: ${{needs.deploy.outputs.link}}" # default is 
           # If action is used in a pull request, attach the preview image for it to the card. Required for custom_image_url
           #include_image: # optional, default is false
           # Avatar to use for user
