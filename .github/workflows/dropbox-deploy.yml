@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     name: Deploy to Dropbox 📦
-    needs: build
+    needs: create
     runs-on: ubuntu-latest
     outputs:
       link: ${{ steps.create-link-dropbox.link }}
