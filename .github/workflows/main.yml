@@ -52,7 +52,7 @@ jobs:
           path: build.zip
           
   deploy:
-    name: Deploy to Dropbox
+    name: Deploy to Dropbox 📦
     needs: build
     runs-on: ubuntu-latest
     steps:
