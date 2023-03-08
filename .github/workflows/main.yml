@@ -55,6 +55,8 @@ jobs:
     name: Deploy to Dropbox 📦
     needs: build
     runs-on: ubuntu-latest
+    outputs:
+      link: ${{ steps.create-link-dropbox.link }}
     steps:
       #Download artifact
       - name: Download a Build Artifact
@@ -65,9 +67,6 @@ jobs:
           # Destination path
           path: build # optional
           
-      - name: ls
-        run: ls && cd build && ls
-          
       # Upload to Dropbox
       - name: Upload to Dropbox
         uses: aTable/deploy-to-dropbox@v1.0.7
@@ -75,7 +74,7 @@ jobs:
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
           GLOB: build/*
           DROPBOX_DESTINATION_PATH_PREFIX: /builds/ # optional, default is /
-      
+  
       # Get Dropbox Link
       - name: Create Dropbox Link
         id: create-link-dropbox
@@ -84,6 +83,12 @@ jobs:
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
           DROPBOX_FILE_PATH: /builds/build # optional, default is /
           DEBUG: false # optional
+  
+  publish-link:
+    name: Share Link 📰
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
           
       #Post Link to Discord
       - name: Discord Notify
@@ -93,7 +98,7 @@ jobs:
           # Title for card
           title: Build Link # optional, default is 
           # Content of card
-          message: ${{ steps.create-link-dropbox.outputs.link}} # default is 
+          message: ${{needs.deploy.outputs.link}} # default is 
           # If action is used in a pull request, attach the preview image for it to the card. Required for custom_image_url
           #include_image: # optional, default is false
           # Avatar to use for user
