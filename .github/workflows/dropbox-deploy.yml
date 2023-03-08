@@ -27,9 +27,11 @@ jobs:
       
 
   deploy:
-    needs: create
-    name: Deploy to Dropbox
+    name: Deploy to Dropbox 📦
+    needs: build
     runs-on: ubuntu-latest
+    outputs:
+      link: ${{ steps.create-link-dropbox.link }}
     steps:
       - name: Download a Build Artifact
         uses: actions/download-artifact@v3.0.2
@@ -69,6 +71,31 @@ jobs:
           DROPBOX_FILE_PATH: /${{ github.ref_name }}-test # optional, default is /
           # Enable debugging.
           DEBUG: false # optional
-          
-      - name: echo link
-        run: echo ${{ steps.create-link-dropbox.outputs.link}}
+
+
+  publish-link:
+    name: Share Link 📰
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      #Post Link to Discord
+      - name: Discord Notify
+        uses: stegzilla/discord-notify@v4
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          # Title for card
+          title: Build Link # optional, default is 
+          # Content of card
+          message: ${{needs.deploy.outputs.link}} # default is 
+          # If action is used in a pull request, attach the preview image for it to the card. Required for custom_image_url
+          #include_image: # optional, default is false
+          # Avatar to use for user
+          #avatar_url: # optional, default is 
+          # Username to send message as
+          #username: # optional, default is GitHub
+          # Colour for the edge of the card in hex
+          #colour: # optional, default is #3371FF
+          # Include custom image on card, include_image must be true
+          #custom_image_url: # optional, default is 
+          # Make the title of the card a link
+          #title_url: # optional, default is 
