@@ -3,7 +3,7 @@ name: Tag
 on:
   workflow_dispatch:
 
-permissions: read-all|write-all
+permissions: read-all
   
 
 jobs:
