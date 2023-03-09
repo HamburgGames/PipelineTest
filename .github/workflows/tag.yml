@@ -3,6 +3,9 @@ name: Tag
 on:
   workflow_dispatch:
 
+permissions: read-all|write-all
+  
+
 jobs:
   create-tag:
     runs-on: ubuntu-18.04
