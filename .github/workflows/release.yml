@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Create an incremental tag
         uses: aurestic/incremental-tag@1.0.8
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         #with:
           # Flag indicating that the script should look for the lastest tag depending on the branch to which the merge is made. That is, if we are in the branch "8.0" and a merge of a PR is made, it will take the last tag "8.0.15.45" and not "11.0.56.23".
           #flag_branch: # optional
