@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2023-03-09)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.0...0.1.1)
+
 ## 0.1.0 (2023-03-09)
 
 * initial commit, empty project | [58169c2](https://github.com/HamburgGames/PipelineTest/commit/58169c2568cef607ba509fd84faef7b2d1388546)
