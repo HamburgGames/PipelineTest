@@ -71,13 +71,13 @@ jobs:
           
       # Zip build
       - name: Zip files
-        run: zip -r "${{BUILD_NAME}}.zip" build
+        run: zip -r "$BUILD_NAME.zip" build
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: "${{BUILD_NAME}}.zip"
+          path: "$BUILD_NAME.zip"
 
 
   deploy:
