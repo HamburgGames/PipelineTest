@@ -103,7 +103,7 @@ jobs:
         with:
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
           GLOB: /*
-          DROPBOX_DESTINATION_PATH_PREFIX: ${{DEPLOY_PATH}} # optional, default is /
+          DROPBOX_DESTINATION_PATH_PREFIX: $DEPLOY_PATH # optional, default is /
   
       # Get Dropbox Link
       - name: Create Dropbox Link
@@ -111,7 +111,7 @@ jobs:
         uses: RexIturan/create-link-dropbox@v0.0.1-alpha
         with:
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
-          DROPBOX_FILE_PATH: ${{DEPLOY_PATH}}${{BUILD_NAME}} # optional, default is /
+          DROPBOX_FILE_PATH: $DEPLOY_PATH$BUILD_NAME # optional, default is /
           DEBUG: false # optional
   
       - name: Write Link into Output
