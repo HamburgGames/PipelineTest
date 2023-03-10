@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 (2023-03-10)
+
+* Update release.yml | [70596ae](https://github.com/HamburgGames/PipelineTest/commit/70596aef6cc00cb86e9bb5eeb00f03679a17b686)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.0...0.1.1)
+
 ## 0.1.0 (2023-03-10)
 
 * initial commit, empty project | [58169c2](https://github.com/HamburgGames/PipelineTest/commit/58169c2568cef607ba509fd84faef7b2d1388546)
