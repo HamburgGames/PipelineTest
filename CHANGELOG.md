@@ -1,5 +1,35 @@
 # Changelog
 
+## 0.1.7 (2023-03-10)
+
+* Update release.yml | [d9264e7](https://github.com/HamburgGames/PipelineTest/commit/d9264e73150123f72e4103be7cd7ea5a351dc444)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.6...0.1.7)
+
+## 0.1.6 (2023-03-10)
+
+* Update README.md | [e46bc4c](https://github.com/HamburgGames/PipelineTest/commit/e46bc4c5c18c1c91795d1478096b4f84da4bd82e)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.5...0.1.6)
+
+## 0.1.5 (2023-03-10)
+
+* Update README.md | [b6b4543](https://github.com/HamburgGames/PipelineTest/commit/b6b45437cc3b36e1d10f129bc1af19f3a01f34c9)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.4...0.1.5)
+
+## 0.1.4 (2023-03-10)
+
+* Update README.md | [4d90e8d](https://github.com/HamburgGames/PipelineTest/commit/4d90e8dbff28242b9aaf8b0479c72cf5d99b37a5)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.3...0.1.4)
+
+## 0.1.3 (2023-03-10)
+
+* Update README.md | [ffcd472](https://github.com/HamburgGames/PipelineTest/commit/ffcd472a1239ec5041264779627a504eb9400cf4)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.2...0.1.3)
+
 ## 0.1.2 (2023-03-10)
 
 [compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.1...0.1.2)
