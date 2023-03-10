@@ -44,7 +44,7 @@ jobs:
 #           targetPlatform: StandaloneWindows64
           
       - name: create world.txt
-        run: mkdir test && echo hello > build/helloWorld1.txt && echo "hello 2" > build/helloWorld2.txt
+        run: mkdir build && echo hello > build/helloWorld1.txt && echo "hello 2" > build/helloWorld2.txt
           
       # Zip build
       - name: Zip files
