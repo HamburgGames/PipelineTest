@@ -40,44 +40,48 @@ jobs:
     env:
       BUILD_NAME: "build${{needs.tag.outputs.tag}}"
     outputs:
-      BUILD_NAME: "build${{needs.tag.outputs.tag}}"
+      BUILD_NAME: $BUILD_NAME
     steps:
+      - run: echo $BUILD_NAME
       # Checkout
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        with:
-          lfs: true
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
+#         with:
+#           lfs: true
 
       # Cache
-      - uses: actions/cache@v2
-        with:
-          path: Library
-          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-          restore-keys: |
-            Library-
+#       - uses: actions/cache@v2
+#         with:
+#           path: Library
+#           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+#           restore-keys: |
+#             Library-
 
       # Test
       #TODO uses: game-ci/unity-test-runner@v2
 
       # Build
-      - name: Build project
-        uses: game-ci/unity-builder@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-        with:
-          targetPlatform: StandaloneWindows64
+#       - name: Build project
+#         uses: game-ci/unity-builder@v2
+#         env:
+#           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+#           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+#           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+#         with:
+#           targetPlatform: StandaloneWindows64
+          
+      - name: create world.txt
+        run: mkdir build && echo hello > build/helloWorld1.txt && echo "hello 2" > build/helloWorld2.txt
           
       # Zip build
       - name: Zip files
-        run: zip -r "$BUILD_NAME.zip" build
+        run: zip -r $BUILD_NAME.zip build
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: "$BUILD_NAME.zip"
+          path: $BUILD_NAME.zip
 
 
   deploy:
