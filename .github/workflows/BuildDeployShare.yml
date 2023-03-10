@@ -1,0 +1,138 @@
+name: Tag & Build & Deploy
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - 'release'
+      
+jobs:
+  tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.tag-write.outputs.tag }}
+    steps:
+      - name: Obtain a GitHub App Installation Access Token
+        id: githubAppAuth
+        run: |
+          TOKEN="$(npx obtain-github-app-installation-access-token ci ${{ secrets.GH_APP_CREDENTIALS_TOKEN }})"
+          echo "::add-mask::$TOKEN"
+          echo "::set-output name=token::$TOKEN"
+        env:
+          GITHUB_TOKEN: ${{ steps.githubAppAuth.outputs.token }}
+    
+      - uses: undergroundwires/bump-everywhere@1.4.0
+        id: create-tag
+        with:
+          commit-message: 'bump to {{version}}'
+          git-token: ${{ steps.githubAppAuth.outputs.token }}
+          release-type: 'none'
+      - id: tag-write
+        run: echo "tag=${{ stepscreate-tag.outputs.version }}" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: Build Project 🛠
+    needs: tag
+    runs-on: ubuntu-latest
+    env:
+      BUILD_NAME: "build${{needs.tag.outputs.tag}}"
+    outputs:
+      BUILD_NAME: ${{BUILD_NAME}}
+    steps:
+      # Checkout
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          lfs: true
+
+      # Cache
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      # Test
+      #TODO uses: game-ci/unity-test-runner@v2
+
+      # Build
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows64
+          
+      # Zip build
+      - name: Zip files
+        run: zip -r "${{BUILD_NAME}}.zip" build
+
+      # Output
+      - uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: "${{BUILD_NAME}}.zip"
+
+
+  deploy:
+    name: Deploy to Dropbox 📦
+    needs: build
+    runs-on: ubuntu-latest
+    outputs:
+      link: ${{ steps.link-write.outputs.link }}
+    env:
+      DEPLOY_PATH: "/${{ github.ref_name }}/"
+      BUILD_NAME: ${{needs.build.outputs.BUILD_NAME}}
+    steps:
+      #Download artifact
+      - name: Download a Build Artifact
+        uses: actions/download-artifact@v3.0.2
+        with:
+          name: Build # optional
+          # path: / # optional
+          
+      # Upload to Dropbox
+      - name: Upload to Dropbox
+        uses: aTable/deploy-to-dropbox@v1.0.7
+        with:
+          DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+          GLOB: /*
+          DROPBOX_DESTINATION_PATH_PREFIX: ${{DEPLOY_PATH}} # optional, default is /
+  
+      # Get Dropbox Link
+      - name: Create Dropbox Link
+        id: create-link-dropbox
+        uses: RexIturan/create-link-dropbox@v0.0.1-alpha
+        with:
+          DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
+          DROPBOX_FILE_PATH: ${{DEPLOY_PATH}}${{BUILD_NAME}} # optional, default is /
+          DEBUG: false # optional
+  
+      - name: Write Link into Output
+        id: link-write
+        run: echo "link=${{ steps.create-link-dropbox.outputs.link }}" >> "$GITHUB_OUTPUT"
+    
+    
+
+  publish-link:
+    name: Share Link 🛎️
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      #Post Link to Discord
+      - name: Discord Notify
+        uses: stegzilla/discord-notify@v4
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          title: Build Link # optional, default is 
+          message: "Download Link: ${{needs.deploy.outputs.link}}"
+      - name: Use the obtained token
+        run: |
+          curl -X POST -H 'Content-Type: application/json' \
+            -d '{"context":"share","state":"success"}' \
+            "https://api.github.com/repos/$GITHUB_REPOSITORY/statuses/$GITHUB_SHA?access_token=$GITHUB_TOKEN"
