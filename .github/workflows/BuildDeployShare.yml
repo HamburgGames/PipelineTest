@@ -1,6 +1,7 @@
 name: Tag & Build & Deploy
 
 on:
+  workflow_dispatch:
   pull_request:
     types:
       - closed
@@ -30,7 +31,7 @@ jobs:
           git-token: ${{ steps.githubAppAuth.outputs.token }}
           release-type: 'none'
       - id: tag-write
-        run: echo "tag=${{ stepscreate-tag.outputs.version }}" >> "$GITHUB_OUTPUT"
+        run: echo "tag=${{ steps.create-tag.outputs.version }}" >> "$GITHUB_OUTPUT"
 
   build:
     name: Build Project 🛠
@@ -39,7 +40,7 @@ jobs:
     env:
       BUILD_NAME: "build${{needs.tag.outputs.tag}}"
     outputs:
-      BUILD_NAME: ${{BUILD_NAME}}
+      BUILD_NAME: "build${{needs.tag.outputs.tag}}"
     steps:
       # Checkout
       - name: Checkout repository
