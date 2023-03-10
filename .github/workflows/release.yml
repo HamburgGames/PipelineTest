@@ -38,7 +38,7 @@ jobs:
 
           # Commit message that will be used in the bump commit
           # (Optional) Default: ⬆️ bump everywhere to {{version}}
-          # commit-message: ''
+          # commit-message: '⬆️ bump everywhere to {{version}}'
 
           # Personal access token (PAT) used to clone & push to the repository.
           # If you use default, it'll not trigger other actions, but your own PAT then it triggers new actions
