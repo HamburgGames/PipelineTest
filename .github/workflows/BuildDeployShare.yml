@@ -40,8 +40,9 @@ jobs:
     env:
       BUILD_NAME: "build${{needs.tag.outputs.tag}}"
     outputs:
-      BUILD_NAME: "build${{needs.tag.outputs.tag}}"
+      BUILD_NAME: $BUILD_NAME
     steps:
+      - run: echo $BUILD_NAME
       # Checkout
 #       - name: Checkout repository
 #         uses: actions/checkout@v2
