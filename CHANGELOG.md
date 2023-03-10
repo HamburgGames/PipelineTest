@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.12 (2023-03-11)
+
+* Update Rot-Cube_mat.mat | [303b6ef](https://github.com/HamburgGames/PipelineTest/commit/303b6ef304485127c5a217fb741a9205bbfa857e)
+* Create build.yml | [daf2fbc](https://github.com/HamburgGames/PipelineTest/commit/daf2fbc27c2c931b1867b54fbd8011af9cdd26b6)
+* Update BuildDeployShare.yml | [6abb116](https://github.com/HamburgGames/PipelineTest/commit/6abb116aef24e9c0180363e91e39bf8c0feb0298)
+* Update build.yml | [92bdd8a](https://github.com/HamburgGames/PipelineTest/commit/92bdd8aa4dbb7b944d078d283ccff2f7abd4a7ea)
+* Update BuildDeployShare.yml | [59b8369](https://github.com/HamburgGames/PipelineTest/commit/59b8369415b8f0caae0a8c139971b62cddf88440)
+* Update build.yml | [0d563a9](https://github.com/HamburgGames/PipelineTest/commit/0d563a9a6069b25ca69bc3a718d05b07d58a5406)
+* Update BuildDeployShare.yml | [8511b8a](https://github.com/HamburgGames/PipelineTest/commit/8511b8a60ae25a6f5364d3d027d9121eacb90a2d)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.11...0.1.12)
+
 ## 0.1.11 (2023-03-11)
 
 * Create BuildDeployShare.yml | [3e1aebe](https://github.com/HamburgGames/PipelineTest/commit/3e1aebe95587f6b956ad5bd15785498349995009)
