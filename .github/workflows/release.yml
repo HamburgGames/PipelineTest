@@ -60,7 +60,7 @@ jobs:
           # Configuring this should not be needed for most use-cases.
           # Use this only if you DO NOT use a single main default branch (e.g. `master` or `main`).
           # (Optional) Default: Default "git clone" behavior. Checks out to default branch of remote.
-          # branch: ''
+          branch: ${{ github.ref_name }}
       - run: |
           echo The PR was merged
         
