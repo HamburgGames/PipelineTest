@@ -66,7 +66,7 @@ jobs:
       - id: write-build-name
         run: echo "name=${{ env.BUILD_PREFIX }}${{ needs.getTag.outputs.tag }}" >> "$GITHUB_OUTPUT"
         
-      - run: echo "build name ${{ outputs.BUILD_NAME }}"
+      - run: echo "build name ${{ steps.write-build-name.outputs.name }}"
       
       # Checkout
 #       - name: Checkout repository
@@ -100,13 +100,13 @@ jobs:
           
       # Zip build
       - name: Zip files
-        run: zip -r ${{ outputs.BUILD_NAME }}.zip build
+        run: zip -r ${{ steps.write-build-name.outputs.name }}.zip build
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ${{ outputs.BUILD_NAME }}.zip
+          path: ${{ steps.write-build-name.outputs.name }}.zip
 
 
   deploy:
