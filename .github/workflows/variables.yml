@@ -13,8 +13,11 @@ jobs:
     env:
       JOB_NAME: JOB
     outputs:
-      NAME: ${{ env.JOB_NAME }}
+      NAME: ${{ steps.write-name.outputs.name }}
     steps:
+      - id: write-name
+        run: echo "name=${{ env.JOB_NAME }}" >> "$GITHUB_OUTPUT"
+    
       - name: create world.txt
         run: mkdir test && echo hello > test/${{ env.GLOBAL }}helloWorld1.txt && echo hello > "test/helloWorld1.txt"
         
