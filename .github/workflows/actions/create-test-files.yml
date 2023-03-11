@@ -1,0 +1,13 @@
+name: 'Create'
+description: 'Create a Test Textfile'
+inputs:
+outputs:
+runs:
+  using: "composite"
+  steps:
+    - name: create world.txt
+      run: echo "hello" > helloWorld.txt
+          
+    # Zip build
+    - name: Zip files
+      run: zip -r build.zip helloWorld.txt
