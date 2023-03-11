@@ -30,15 +30,33 @@ jobs:
           commit-message: 'bump to {{version}}'
           git-token: ${{ steps.githubAppAuth.outputs.token }}
           release-type: 'none'
-      - id: tag-write
-        run: echo "tag=${{ steps.create-tag.outputs.version }}" >> "$GITHUB_OUTPUT"
+
+  getTag:
+    name: Get Tag
+    needs: tag
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.write-tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0 # Required due to the way Git works, without it this action won't be able to find any or the correct tags
+      
+      - name: 'Get Previous tag'
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@v1"
+        with:
+          fallback: 0.0.0-alpha # Optional fallback tag to use when no tag can be found
+      
+      - id: write-tag
+        run: echo "tag=${{ steps.previoustag.outputs.tag }}" >> "$GITHUB_OUTPUT"
 
   build:
     name: Build Project 🛠
-    needs: tag
+    needs: getTag
     runs-on: ubuntu-latest
     env:
-      BUILD_NAME: "build${{needs.tag.outputs.tag}}"
+      BUILD_NAME: ${{ needs.getTag.outputs.tag }}
     outputs:
       BUILD_NAME: ${{ steps.write-build-name.outputs.name }}
     steps:
