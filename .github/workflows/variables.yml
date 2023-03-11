@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       JOB_NAME: JOB
+    outputs:
+      NAME: ${{ env.JOB_NAME }}
     steps:
       - name: create world.txt
         run: mkdir test && echo hello > test/${{ env.GLOBAL }}helloWorld1.txt && echo hello > "test/helloWorld1.txt"
@@ -20,7 +22,7 @@ jobs:
         
       # Zip build
       - name: Zip files
-        run: zip -r build.zip test
+        run: zip -r build${{ env.JOB_NAME }}.zip test
         
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.2
@@ -28,4 +30,16 @@ jobs:
           # Artifact name
           name: Build # optional, default is artifact
           # A file, directory or wildcard pattern that describes what to upload
-          path: build.zip
+          path: build${{ env.JOB_NAME }}.zip
+
+  step2:
+    name: step 2
+    runs-on: ubuntu-latest
+    env:
+      JOB_NAME: ${{ needs.create.outputs.NAME }}
+    steps:
+      - name: create world.txt
+        run: mkdir test && echo hello > test/${{ env.JOB_NAME }}helloWorld1.txt && echo hello > "test/helloWorld1.txt"
+        
+      - run: ls && cd test && ls
+      - run: echo ${{ env.JOB_NAME }}|${{ env.GLOBAL }}
