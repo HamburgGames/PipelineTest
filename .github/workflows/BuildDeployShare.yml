@@ -59,14 +59,14 @@ jobs:
     needs: getTag
     runs-on: ubuntu-latest
     env:
-      BUILD_NAME: ${{ env.BUILD_PREFIX }}${{ needs.getTag.outputs.tag }}
+      TAG: ${{ needs.getTag.outputs.tag }}
     outputs:
       BUILD_NAME: ${{ steps.write-build-name.outputs.name }}
     steps:
       - id: write-build-name
-        run: echo "name=${{ env.BUILD_NAME }}" >> "$GITHUB_OUTPUT"
+        run: echo "name=${{ env.BUILD_PREFIX }}${{ needs.getTag.outputs.tag }}" >> "$GITHUB_OUTPUT"
         
-      - run: echo "build name ${{ env.BUILD_NAME }}"
+      - run: echo "build name ${{ outputs.BUILD_NAME }}"
       
       # Checkout
 #       - name: Checkout repository
@@ -100,13 +100,13 @@ jobs:
           
       # Zip build
       - name: Zip files
-        run: zip -r ${{ env.BUILD_NAME }}.zip build
+        run: zip -r ${{ outputs.BUILD_NAME }}.zip build
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ${{ env.BUILD_NAME }}.zip
+          path: ${{ outputs.BUILD_NAME }}.zip
 
 
   deploy:
