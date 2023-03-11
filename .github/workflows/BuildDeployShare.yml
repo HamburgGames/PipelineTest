@@ -123,12 +123,14 @@ jobs:
           name: Build # optional
           #path: build # optional
           
+      - run: ls
+          
       # Upload to Dropbox
       - name: Upload to Dropbox
         uses: aTable/deploy-to-dropbox@v1.0.7
         with:
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
-          GLOB: build/${{ env.BUILD_NAME }}.zip
+          GLOB: ${{ env.BUILD_NAME }}.zip
           DROPBOX_DESTINATION_PATH_PREFIX: ${{ env.DEPLOY_PATH }} # optional, default is /
           DEBUG: true
   
