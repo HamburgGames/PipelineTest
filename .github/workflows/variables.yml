@@ -37,12 +37,14 @@ jobs:
 
   step2:
     name: step 2
+    needs: create
     runs-on: ubuntu-latest
     env:
       JOB_NAME: ${{ needs.create.outputs.NAME }}
     steps:
+      - run: echo "${{ env.JOB_NAME }}-${{ env.GLOBAL }}"
+    
       - name: create world.txt
         run: mkdir test && echo hello > test/${{ env.JOB_NAME }}helloWorld1.txt && echo hello > "test/helloWorld1.txt"
         
       - run: ls && cd test && ls
-      - run: echo ${{ env.JOB_NAME }}|${{ env.GLOBAL }}
