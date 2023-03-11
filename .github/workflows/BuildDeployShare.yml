@@ -100,7 +100,7 @@ jobs:
           
       # Zip build
       - name: Zip files
-        run: zip -r ${{ steps.write-build-name.outputs.name }}.zip build
+        run: cd build && zip -r ../${{ steps.write-build-name.outputs.name }}.zip *
 
       # Output
       - uses: actions/upload-artifact@v2
