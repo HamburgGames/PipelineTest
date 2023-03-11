@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: create test
-        uses: ./.github/actions/actions/create-test-files
+        uses: ./.github/actions/actions/create-test-files.yml
     
