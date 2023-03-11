@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.15 (2023-03-11)
+
+* Update README.md | [1266894](https://github.com/HamburgGames/PipelineTest/commit/1266894c8d5ce8938002a6d30847f9f026aaadee)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.14...0.1.15)
+
 ## 0.1.14 (2023-03-11)
 
 * create composite action | [9c7aed8](https://github.com/HamburgGames/PipelineTest/commit/9c7aed8037503d8b73180eba0eb6a420d43a414d)
