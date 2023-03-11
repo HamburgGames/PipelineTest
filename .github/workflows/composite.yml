@@ -1,0 +1,13 @@
+name: composition
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  create:
+    name: Create files
+    runs-on: ubuntu-latest
+    steps:
+      - name: create test
+        uses: ./.github/actions/actions/create-test-files.yml
+    
