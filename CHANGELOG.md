@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.22 (2023-03-12)
+
+* move build script to own folder | [e7914e0](https://github.com/HamburgGames/PipelineTest/commit/e7914e0f0e33f278097421fc695dc63daacb701d)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.21...0.1.22)
+
 ## 0.1.21 (2023-03-12)
 
 * Update variables.yml | [8be1e0b](https://github.com/HamburgGames/PipelineTest/commit/8be1e0bfe96dd3421a14849fbfdae3045fa54b7d)
