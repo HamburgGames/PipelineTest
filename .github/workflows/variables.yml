@@ -14,7 +14,7 @@ jobs:
       JOB_NAME: JOB
     steps:
       - name: create world.txt
-        run: mkdir test && echo hello > test/$GLOBALhelloWorld1.txt && echo hello > "test/helloWorld1.txt"
+        run: mkdir test && echo hello > test/${{ env.GLOBAL }}helloWorld1.txt && echo hello > "test/helloWorld1.txt"
         
       - run: ls && cd test && ls        
         
