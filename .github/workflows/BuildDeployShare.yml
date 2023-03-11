@@ -8,6 +8,9 @@ on:
     branches:
       - 'release'
       
+env:
+  BUILD_PREFIX: build-
+      
 jobs:
   tag:
     if: github.event.pull_request.merged == true
@@ -56,7 +59,7 @@ jobs:
     needs: getTag
     runs-on: ubuntu-latest
     env:
-      BUILD_NAME: build-${{ needs.getTag.outputs.tag }}
+      BUILD_NAME: ${{ env.BUILD_PREFIX }}${{ needs.getTag.outputs.tag }}
     outputs:
       BUILD_NAME: ${{ steps.write-build-name.outputs.name }}
     steps:
