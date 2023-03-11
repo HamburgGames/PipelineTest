@@ -1,4 +1,4 @@
-name: variables
+name: composition
 
 on: 
   workflow_dispatch:
