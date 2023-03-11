@@ -40,9 +40,13 @@ jobs:
     env:
       BUILD_NAME: "build${{needs.tag.outputs.tag}}"
     outputs:
-      BUILD_NAME: $BUILD_NAME
+      BUILD_NAME: ${{ steps.write-build-name.outputs.name }}
     steps:
-      - run: echo $BUILD_NAME
+      - id: write-build-name
+        run: echo "name=${{ env.BUILD_NAME }}" >> "$GITHUB_OUTPUT"
+        
+      - run: echo "build name ${{ env.BUILD_NAME }}"
+      
       # Checkout
 #       - name: Checkout repository
 #         uses: actions/checkout@v2
@@ -75,13 +79,13 @@ jobs:
           
       # Zip build
       - name: Zip files
-        run: zip -r $BUILD_NAME.zip build
+        run: zip -r ${{ BUILD_NAME }}.zip build
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: $BUILD_NAME.zip
+          path: ${{ BUILD_NAME }}.zip
 
 
   deploy:
@@ -92,7 +96,7 @@ jobs:
       link: ${{ steps.link-write.outputs.link }}
     env:
       DEPLOY_PATH: "/${{ github.ref_name }}/"
-      BUILD_NAME: ${{needs.build.outputs.BUILD_NAME}}
+      BUILD_NAME: ${{ needs.build.outputs.BUILD_NAME }}
     steps:
       #Download artifact
       - name: Download a Build Artifact
