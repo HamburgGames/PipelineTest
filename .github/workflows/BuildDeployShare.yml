@@ -121,14 +121,14 @@ jobs:
         uses: actions/download-artifact@v3.0.2
         with:
           name: Build # optional
-          # path: / # optional
+          path: build # optional
           
       # Upload to Dropbox
       - name: Upload to Dropbox
         uses: aTable/deploy-to-dropbox@v1.0.7
         with:
           DROPBOX_ACCESS_TOKEN: ${{ secrets.DROPBOX_ACCESS_TOKEN }}
-          GLOB: /*
+          GLOB: build/*
           DROPBOX_DESTINATION_PATH_PREFIX: ${{ env.DEPLOY_PATH }} # optional, default is /
   
       # Get Dropbox Link
