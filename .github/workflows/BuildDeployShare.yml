@@ -97,8 +97,9 @@ jobs:
           targetPlatform: StandaloneWindows64
 
       - name: Print Version
-        run: echo "Project Version: ${{ steps.buildStep.outputs.buildVersion }}"
+        run: echo "project version ${{ steps.buildStep.outputs.buildVersion }}"
 
+        
       # Zip build
       - name: Zip files
         run: cd build && zip -r ../${{ steps.write-build-name.outputs.name }}.zip *
