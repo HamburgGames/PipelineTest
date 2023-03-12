@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.26 (2023-03-12)
+
+* Update Rot-Cube_mat.mat | [e35d2ee](https://github.com/HamburgGames/PipelineTest/commit/e35d2ee7893d1ae83194140cb18b056ea2437b24)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.25...0.1.26)
+
 ## 0.1.25 (2023-03-12)
 
 * Update Rot-Cube_mat.mat | [d7d5105](https://github.com/HamburgGames/PipelineTest/commit/d7d5105a663d0a1dec194598a33ffc1dd7dd88a0)
