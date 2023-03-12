@@ -69,35 +69,36 @@ jobs:
       - run: echo "build name ${{ steps.write-build-name.outputs.name }}"
       
       # Checkout
-#       - name: Checkout repository
-#         uses: actions/checkout@v2
-#         with:
-#           lfs: true
+      - name: Checkout repository
+        uses: actions/checkout@vv3.3.0
+        with:
+          lfs: true
 
       # Cache
-#       - uses: actions/cache@v2
-#         with:
-#           path: Library
-#           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
-#           restore-keys: |
-#             Library-
+      - uses: actions/cache@v2
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
 
       # Test
       #TODO uses: game-ci/unity-test-runner@v2
 
       # Build
-#       - name: Build project
-#         uses: game-ci/unity-builder@v2
-#         env:
-#           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-#           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
-#           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
-#         with:
-#           targetPlatform: StandaloneWindows64
-          
-      - name: create world.txt
-        run: mkdir build && echo hello > build/helloWorld1.txt && echo "hello 2" > build/helloWorld2.txt
-          
+      - name: Build project
+        uses: game-ci/unity-builder@v2
+        id: buildStep
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          targetPlatform: StandaloneWindows64
+
+      - name: Print Version
+        run: echo "Project Version: ${{ steps.buildStep.outputs.buildVersion }}"
+
       # Zip build
       - name: Zip files
         run: cd build && zip -r ../${{ steps.write-build-name.outputs.name }}.zip *
