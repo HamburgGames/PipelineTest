@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.23 (2023-03-12)
+
+* Update composite.yml | [ffbc2ab](https://github.com/HamburgGames/PipelineTest/commit/ffbc2ab1a9590f51be121d4d66e752636f429233)
+* Update composite.yml | [385170f](https://github.com/HamburgGames/PipelineTest/commit/385170f6895c28828a9c717fe421967cff4b1ee6)
+* move action to /actions | [d04b5ea](https://github.com/HamburgGames/PipelineTest/commit/d04b5ea754dba7ffebbd65433df23797b6077d43)
+* Update composite.yml | [2e478f5](https://github.com/HamburgGames/PipelineTest/commit/2e478f55bc53f0159a2a3e7cfe871786f93a45d5)
+* Update composite.yml | [44a939d](https://github.com/HamburgGames/PipelineTest/commit/44a939da4d9bd61e8513c1dbddf1b622ffd10509)
+* Update BuildDeployShare.yml | [0e9bd8a](https://github.com/HamburgGames/PipelineTest/commit/0e9bd8a775761213f937021e3386030c80d8b161)
+* Update BuildDeployShare.yml | [f6f58d8](https://github.com/HamburgGames/PipelineTest/commit/f6f58d81fbd807914843b3dc5bbcb9c594696315)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.22...0.1.23)
+
 ## 0.1.22 (2023-03-12)
 
 * move build script to own folder | [e7914e0](https://github.com/HamburgGames/PipelineTest/commit/e7914e0f0e33f278097421fc695dc63daacb701d)
