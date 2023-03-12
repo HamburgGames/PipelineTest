@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.25 (2023-03-12)
+
+* Update Rot-Cube_mat.mat | [d7d5105](https://github.com/HamburgGames/PipelineTest/commit/d7d5105a663d0a1dec194598a33ffc1dd7dd88a0)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.24...0.1.25)
+
 ## 0.1.24 (2023-03-12)
 
 * Update BuildDeployShare.yml | [5caa335](https://github.com/HamburgGames/PipelineTest/commit/5caa3358f865e646e6a6e8be5b3174e5a8a7c59e)
