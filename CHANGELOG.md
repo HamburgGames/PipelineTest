@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.24 (2023-03-12)
+
+* Update BuildDeployShare.yml | [5caa335](https://github.com/HamburgGames/PipelineTest/commit/5caa3358f865e646e6a6e8be5b3174e5a8a7c59e)
+
+[compare](https://github.com/HamburgGames/PipelineTest/compare/0.1.23...0.1.24)
+
 ## 0.1.23 (2023-03-12)
 
 * Update composite.yml | [ffbc2ab](https://github.com/HamburgGames/PipelineTest/commit/ffbc2ab1a9590f51be121d4d66e752636f429233)
